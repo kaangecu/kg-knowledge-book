@@ -12,7 +12,8 @@
     "@babel/runtime": "^7.17.9",
     "next": "12.1.5",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "sass": "^1.50.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

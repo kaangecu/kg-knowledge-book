@@ -1,10 +1,9 @@
 import React from 'react'
-import SideBar from  'components/SideBar'
 
 
 const MainPage = () => {
   return (
-    <div><SideBar items={["hi","bye"]}/></div>
+    <div><h1>MainPage</h1></div>
   )
 }
 

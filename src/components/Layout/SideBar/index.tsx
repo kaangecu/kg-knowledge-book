@@ -1,29 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
+import { slugs } from 'consts';
 import styles from './SideBar.module.scss';
 
-type SideBarType = {
-  items?: Array<string>;
-};
-
-const SideBar = (props: SideBarType) => {
-  const { items } = props;
+const SideBar = () => {
+  const renderLinks = slugs.map(({ url, text }) => (
+    <li key={url}>
+      <Link href={url}>
+        <a>{text}</a>
+      </Link>
+    </li>
+  ));
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
         <nav>
-          <ul>
-            <li>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/second">
-                <a>Second</a>
-              </Link>
-            </li>
-          </ul>
+          <ul>{renderLinks}</ul>
         </nav>
       </div>
     </aside>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 import TsDropdown from 'components/TsDropdown';
 import { getUsersDummyApi, getUsersReqresApi } from 'lib/users';
@@ -8,6 +8,7 @@ import {
   DummyUserResponseType,
   ReqesUserResponseType,
 } from 'lib/users/types';
+import styles from './TsDropdownPage.module.scss';
 
 type TsDropdownPagePropType = {
   jsonReqesUsers: string;
@@ -22,7 +23,7 @@ const TsDropdownPage: NextPage<TsDropdownPagePropType> = (
   const dummyUsersData: DummyUserResponseType = JSON.parse(jsonDummyUsers);
 
   const dummyUsers: DummyUserType[] = dummyUsersData?.data;
-  const reqestUsers: ReqesUserType[] = reqesUsersData?.data?.map((el) => {
+  const reqesUsers: ReqesUserType[] = reqesUsersData?.data?.map((el) => {
     const changedUser: ReqesUserType = {
       id: el.id,
       email: el.email,
@@ -33,28 +34,47 @@ const TsDropdownPage: NextPage<TsDropdownPagePropType> = (
     return changedUser;
   });
 
-  const [dummyUser, setDummyUser] = useState<DummyUserType>();
-  const [reqesUser, setReqesUser] = useState<ReqesUserType>();
+  const [dummyUser, setDummyUser] = useState<DummyUserType>(dummyUsers[0]);
+  const [reqesUser, setReqesUser] = useState<ReqesUserType>(reqesUsers[0]);
 
-  useEffect(() => {
-    console.log(dummyUser)
-    console.log(reqesUser)
-  }, [dummyUser,reqesUser])
-  
-  return (
-    <div>
-      <label htmlFor="dummyUser">Dummy User:</label>
-      <p id="dummyUser">{dummyUser?.firstName}</p>
-      <br />
-      <TsDropdown<DummyUserType> onChange={setDummyUser} values={dummyUsers} />
-
-      <br />
-
-      <label htmlFor="reqesUser">Reqes User:</label>
-      <p id="reqesUser">{reqesUser?.firstName}</p>
-      <br />
-      <TsDropdown<ReqesUserType> onChange={setReqesUser} values={reqestUsers} />
+  const renderDropdowns = (
+    <div className={styles['dropdown-container']}>
+      <div>
+        <TsDropdown<DummyUserType>
+          onChange={setDummyUser}
+          values={dummyUsers}
+          label="Dummy User"
+        />
+        <p>Selected Dummy : {dummyUser?.firstName}</p>
+      </div>
+      <div>
+        <TsDropdown<ReqesUserType>
+          onChange={setReqesUser}
+          values={reqesUsers}
+          label="Reqes User"
+        />
+        <p>Selected Reqes :{reqesUser?.firstName}</p>
+      </div>
     </div>
+  );
+  return (
+    <>
+      <h1>
+        This page aims to demonstrate an implementation of TypeScript Generics.
+      </h1>
+      <h3>
+        In our case we have 2 different user objects with shared fields. We want
+        to display these users using the same Dropdown component in a strongly
+        typed manner.
+      </h3>
+      <a href="https://www.developerway.com/posts/typescript-generics-for-react-developers">
+        Inspider By Developerway&lsquo;s Blog Post
+      </a>
+      <br/>
+      <br/>
+      <br/>
+      {renderDropdowns}
+    </>
   );
 };
 

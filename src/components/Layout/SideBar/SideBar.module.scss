@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .aside {
   border-right: 1px solid;
 }
@@ -8,7 +10,7 @@
   position: sticky;
   width: 300px;
   top: 0;
-  padding-top: 30px;
+  padding-top: $PaddingTopMain;
 }
 
 .container ul{

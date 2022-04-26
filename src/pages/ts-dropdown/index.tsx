@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import TsDropdown from 'components/TsDropdown';
+import {getUsers} from 'lib/users'
 
 type User = {
   id: string;
@@ -14,7 +15,25 @@ type Task = {
   taskNo: number;
 };
 
-const TsDropdownPage: NextPage = () => {
+export async function getStaticProps() {
+  const data = await getUsers().then(el=>el)
+  
+  //Serverside proplarda object döndüremiyoruz propla work around yapmak gerekiyor
+  //https://lifesaver.codes/answer/getserversideprops-cannot-be-serialized-as-json-please-only-return-json-serializable-data-types-11993
+  //https://stackoverflow.com/questions/65689445/object-object-response-cannot-be-serialized-as-json
+  const jsonData = JSON.stringify(data)
+  return {
+    props: {
+      jsonData,
+    },
+  }
+}
+
+const TsDropdownPage: NextPage = (props:any) => {
+  const {jsonData} = props
+  const data = JSON.parse(jsonData)
+
+  console.log(data)
   const users: User[] = [
     {
       id: '1',
@@ -56,7 +75,7 @@ const TsDropdownPage: NextPage = () => {
       <TsDropdown<User> onChange={setUser} values={users} />
 
       <br />
-      
+
       <label htmlFor="task">Task:</label>
       <p id="task">{task?.title}</p>
       <br />

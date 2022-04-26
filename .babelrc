@@ -8,7 +8,8 @@
         "root": ["./"],
         "alias": {
           "components": "./src/components",
-          "styles": "./src/styles"
+          "styles": "./src/styles",
+          "consts": "./src/consts"
         }
       }
     ]

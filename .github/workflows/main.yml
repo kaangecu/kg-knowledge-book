@@ -13,7 +13,7 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           appdir: .
-          heroku_api_key: "445e2362-8e2d-4264-9ccb-a2f11b90aae3"
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "kg-knowledge-book" #Must be unique in Heroku
           heroku_email: "kaangecu@gmail.com"
           usedocker: true

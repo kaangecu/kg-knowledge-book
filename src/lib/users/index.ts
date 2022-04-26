@@ -1,5 +1,5 @@
 // Key ===   6267d008536f373aeb532ca6
-import   client  from "./index";
+import   client  from "../index";
 
 
 export const getUsers = async ()=>{

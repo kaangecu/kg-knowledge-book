@@ -1,13 +1,21 @@
 import axios from 'axios';
 
-const api_url = 'https://dummyapi.io/data/v1';
+const dummyapi_api_url = 'https://dummyapi.io/data/v1';
 
 const api_key = '6267d008536f373aeb532ca6';
 
-const client = axios.create({
-  baseURL: api_url,
+const reqres_api_url = 'https://reqres.in/api/';
+
+const dummyapi_client = axios.create({
+  baseURL: dummyapi_api_url,
 });
 
-client.defaults.headers.common['app-id'] = api_key;
+const reqres_client = axios.create({
+  baseURL: reqres_api_url,
+});
 
-export default client;
+dummyapi_client.defaults.headers.common['app-id'] = api_key;
+
+export const dummyapi = dummyapi_client;
+
+export const reqres = reqres_client;

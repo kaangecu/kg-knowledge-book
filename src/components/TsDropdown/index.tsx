@@ -1,8 +1,9 @@
 import React, { ChangeEvent } from 'react';
 
 type Base = {
-  id: string;
-  title: string;
+  id: any;        //todo idlerden biri number biri string
+  firstName: string;
+  lastName: string;
 };
 
 type GenericSelectProps<T> = {
@@ -16,14 +17,14 @@ const TsDropdown = <T extends Base>({
 }: GenericSelectProps<T>) => {
   const onSelectChange = (e: ChangeEvent) => {
     const element = e.target as HTMLOptionElement;
-    const val = values.find((value) => value.id === element.value);
+    const val = values.find((value) => value.id == element.value); //todo idlerden biri number biri string === i bozuyor
 
     val && onChange(val);
   };
 
   const renderOptions = values.map((value) => (
     <option key={value.id} value={value.id}>
-      {value.title}
+      {value.firstName}
     </option>
   ));
 

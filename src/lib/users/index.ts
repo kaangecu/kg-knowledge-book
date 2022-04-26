@@ -1,15 +1,21 @@
 // Key ===   6267d008536f373aeb532ca6
-import   client  from "../index";
+import   {dummyapi,reqres}  from "../index";
 
 
-export const getUsers = async ()=>{
+export const getUsersDummyApi = async ()=>{
   let params = new URLSearchParams();
   params.append("limit", "10")
-  // searchedAnalytic && params.append("websiteUrl", searchedAnalytic);
-  // searchedDateTimes.minDate && params.append("minDate", searchedDateTimes.minDate);
-  // searchedDateTimes.maxDate && params.append("maxDate", searchedDateTimes.maxDate);
 
-  const response = await client.get("/user", { params });
+  const response = await dummyapi.get("/user", { params });
+  
+  return  response?.data;
+}
+
+export const getUsersReqresApi = async ()=>{
+  let params = new URLSearchParams();
+  params.append("page", "1")
+
+  const response = await reqres.get("/users", { params });
   
   return  response?.data;
 }
